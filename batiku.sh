@@ -40,14 +40,8 @@ mysql -h database-1.cgu4ysargwic.us-east-1.rds.amazonaws.com -u admin -p << EOF
 # Show existing databases
 show databases;
 
-# Create the datasiswa database
-create database batiku;
-
 # Use the datasiswa database
 use batiku;
-
-# Import the SQL script to create tables and populate data
-source /var/www/batiku/batiku.sql
 
 # Show tables in the datasiswa database
 show tables;

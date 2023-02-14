@@ -13,10 +13,10 @@ service apache2 start
 cd /var/www/ && mkdir tes
 chmod 777 -R /var/www/tes/
 cd /var/www/tes/ && git clone https://github.com/OmTegar/batiku.git
-cd /var/www/batiku/admin/proses/image/* && mv -f /var/www/tes/batiku/admin/proses/image/* /var/www/batiku/admin/proses/image/
-cd /var/www/batiku/admin/proses/* && mv -f /var/www/tes/batiku/admin/proses/* /var/www/batiku/admin/proses/
-cd /var/www/batiku/admin/* && mv -f /var/www/tes/batiku/admin/* /var/www/batiku/admin/
-cd /var/www/batiku/* && mv -f /var/www/tes/batiku/* /var/www/batiku/
+cd /var/www/batiku/admin/proses/image/ && mv -f /var/www/tes/batiku/admin/proses/image/* /var/www/batiku/admin/proses/image/
+cd /var/www/batiku/admin/proses/ && mv -f /var/www/tes/batiku/admin/proses/* /var/www/batiku/admin/proses/
+cd /var/www/batiku/admin/ && mv -f /var/www/tes/batiku/admin/* /var/www/batiku/admin/
+cd /var/www/batiku/ && mv -f /var/www/tes/batiku/* /var/www/batiku/
 
 # chmod 777 -R /var/www/tes/web-project3/
 chmod 777 -R /var/www/batiku/
@@ -34,7 +34,7 @@ systemctl restart apache2
 
 
 # Replace the contents of the file
-sed -i 's/localhost/database-1.cgu4ysargwic.us-east-1.rds.amazonaws.com/' /var/www/batiku/admin/config/db.php
+sed -i 's/localhost/database-1.csfoslsqwvcb.us-east-1.rds.amazonaws.com/' /var/www/batiku/admin/config/db.php
 sed -i 's/root/admin/' /var/www/batiku/admin/config/db.php
 sed -i 's/\"\"/\"admin123\"/g' /var/www/batiku/admin/config/db.php
 
@@ -46,13 +46,19 @@ else
 fi
 
 # Login to the RDS database
-mysql -h database-1.cgu4ysargwic.us-east-1.rds.amazonaws.com -u admin -p << EOF
+mysql -h database-1.csfoslsqwvcb.us-east-1.rds.amazonaws.com -u admin -p << EOF
 
 # Show existing databases
 show databases;
 
+# Create the datasiswa database
+create database batiku;
+
 # Use the datasiswa database
 use batiku;
+
+# Import the SQL script to create tables and populate data
+source /var/www/batiku/batiku.sql
 
 # Show tables in the datasiswa database
 show tables;
