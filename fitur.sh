@@ -93,9 +93,9 @@ EOF
                             echo "Failed to modify the file db.php."
                         fi
                         echo "Masukkan endpoint RDS anda : "
-                        read -s endpoint
+                        read endpoint
                         echo "Masukkan username database anda : "
-                        read -s endpoint
+                        read username
                         mysql -h $endpoint -u $username -p <<EOF
 show databases;
 use batiku;
